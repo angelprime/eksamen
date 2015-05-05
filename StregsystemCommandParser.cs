@@ -4,9 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Stregsystem
+namespace eksamen
 {
-    class CustomExceptions
+    class StregsystemCommandParser
     {
+        public void ParseCommand(string command)
+        {
+
+        }
     }
 }

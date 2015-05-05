@@ -1,0 +1,6 @@
+C:\Users\jonas\Documents\GitHub\eksamen\bin\Debug\Stregsystem.exe.config
+C:\Users\jonas\Documents\GitHub\eksamen\bin\Debug\Stregsystem.exe
+C:\Users\jonas\Documents\GitHub\eksamen\bin\Debug\Stregsystem.pdb
+C:\Users\jonas\Documents\GitHub\eksamen\obj\Debug\Stregsystem.csprojResolveAssemblyReference.cache
+C:\Users\jonas\Documents\GitHub\eksamen\obj\Debug\Stregsystem.exe
+C:\Users\jonas\Documents\GitHub\eksamen\obj\Debug\Stregsystem.pdb

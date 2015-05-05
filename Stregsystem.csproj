@@ -7,7 +7,7 @@
     <ProjectGuid>{818E290C-B665-4217-8519-B38CBE9D8E02}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Stregsystem</RootNamespace>
+    <RootNamespace>eksamen</RootNamespace>
     <AssemblyName>Stregsystem</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -66,8 +66,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomExceptions.cs" />
+    <Compile Include="IStregsystemUI.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StregsystemCLI.cs" />
+    <Compile Include="StregsystemCommandParser.cs" />
+    <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
