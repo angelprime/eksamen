@@ -1,0 +1,2 @@
+c:\users\jonas\documents\visual studio 2013\Projects\eksamen\eksamen\bin\Debug\eksamen.exe.config
+c:\users\jonas\documents\visual studio 2013\Projects\eksamen\eksamen\bin\Debug\Stregsystem.exe.config
