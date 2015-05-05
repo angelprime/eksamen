@@ -16,16 +16,20 @@ namespace eksamen
             _product = product;
             _price = product.Price;
         }
-
+        
         public override User Execute()
         {
-            //TODO
-            return base.Execute();
+            if (_product.CanBeBoughtWithCredit || (_user.Balance + _creditChange) >= 0)
+            {
+                return base.Execute();
+            }
+            throw new InsufficientCreditException("Not enough funds to make purchase. User: " + _user.ID + " product: " + _product.ID + " price: " + _product.Price, _user, _product);
+
         }
 
         public override string ToString()
         {
-            string result = "Purchase ID: " + _transactionID + " User ID: " + _user.ID + " Amount: " + _price + " timestamp: " + _time.ToString();
+            string result = "Purchase Transaction ID: " + _transactionID + " User ID: " + _user.ID + " Amount: " + _price + " timestamp: " + _time.ToString();
             return result;
         }
     }

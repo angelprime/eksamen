@@ -30,5 +30,10 @@ namespace eksamen
         {
             get { return _price; }
         }
+
+        public bool CanBeBoughtWithCredit
+        {
+            get { return _canBeBoughtOnCredit; }
+        }
     }
 }

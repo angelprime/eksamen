@@ -26,8 +26,8 @@ namespace eksamen
 
         public override string ToString()
         {
-            string result = "Deposit  ID: " + _transactionID + " User ID: " + _user.ID + " Amount: " + _creditChange + " timestamp: " + _time.ToString();
-            return result;//"Purchase ID: "
+            string result = "Deposit  Transaction ID: " + _transactionID + " User ID: " + _user.ID + " Amount: " + _creditChange + " timestamp: " + _time.ToString();
+            return result;
         }
     }
 }

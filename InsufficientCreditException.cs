@@ -8,21 +8,22 @@ namespace eksamen
 {
     class InsufficientCreditException : Exception //Thanks MSDN!
     {
-        public InsufficientCreditException()
+        User _user;
+        Product _product;
+        public InsufficientCreditException(string message, User user, Product product)
         {
-
+            _user = user;
+            _product = product;
         }
 
-        public InsufficientCreditException(string message)
-            : base(message)
+        public User User
         {
-
+            get { return _user; }
         }
 
-        public InsufficientCreditException(String message, Exception inner)
-            : base(message, inner)
+        public Product Product
         {
-
+            get { return _product; }
         }
 
     }

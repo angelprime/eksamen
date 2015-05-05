@@ -30,6 +30,7 @@ namespace eksamen
         public int ID
         {
             get { return _userID; }
+            set { Balance = value; }
         }
 
         public override string ToString()
