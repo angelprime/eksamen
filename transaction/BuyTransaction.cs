@@ -19,6 +19,10 @@ namespace eksamen
         
         public override User Execute()
         {
+            if (!_product.IsActive)
+            {
+                throw new ProductInactiveException("The product is not currently available. User: " + _user.ID + " product: " + _product.ID, _user, _product);
+            }
             if (_product.CanBeBoughtWithCredit || (_user.Balance + _creditChange) >= 0)
             {
                 return base.Execute();

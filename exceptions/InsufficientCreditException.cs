@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace eksamen
 {
-    class InsufficientCreditException : Exception //Thanks MSDN!
+    class InsufficientCreditException : Exception
     {
         User _user;
         Product _product;
         public InsufficientCreditException(string message, User user, Product product)
+            : base (message)
         {
             _user = user;
             _product = product;

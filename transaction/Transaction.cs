@@ -37,9 +37,9 @@ namespace eksamen
             return _user;
         }
 
-        public virtual override string ToString()
+        public override string ToString()
         {
-            string result = "ID: " + _transactionID + " Amount: " + _creditChange + " timestamp: " + _time.ToString();
+            string result = "Admin    Transaction ID: " + _transactionID + " Amount: " + _creditChange + " timestamp: " + _time.ToString();
             return result;
         }
     }

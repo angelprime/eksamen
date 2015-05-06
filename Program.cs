@@ -10,8 +10,8 @@ namespace eksamen
     {
         static void Main(string[] args)
         {
-            IStregsystem stregsystem = new Stregsystem();
-            StregsystemCLI cli = new StregsystemCLI(stregsystem);
+            IStregsystemLogic stregsystem = new StregsystemLogic();
+            IStregsystemUI cli = new StregsystemCLI(stregsystem);
             StregsystemCommandParser parser = new StregsystemCommandParser(cli, stregsystem);
             cli.Start(parser);
         }
