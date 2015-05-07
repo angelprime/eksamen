@@ -65,6 +65,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SaveLoadTools.cs" />
     <Compile Include="transaction\BuyTransaction.cs" />
     <Compile Include="transaction\InsertCashTransaction.cs" />
     <Compile Include="exceptions\InsufficientCreditException.cs" />
