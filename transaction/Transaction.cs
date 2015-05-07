@@ -12,6 +12,7 @@ namespace eksamen
         protected User _user;
         protected DateTime _time;
         protected bool _hasExecuted;
+        protected String _priceAsString;
         public Transaction(long ID, User user, long creditChange)
         {
             _transactionID = ID;
@@ -23,6 +24,22 @@ namespace eksamen
             {
                 _hasExecuted = true;
                 throw new ArgumentException("Must specify a user, a positive ID and a non-zero credit change");
+            }
+            _priceAsString = _creditChange.ToString();
+            int _priceLen = _priceAsString.Length;
+            _priceAsString = _creditChange.ToString();
+            _priceLen = _priceAsString.Length;
+            if (_creditChange != 0)
+            {
+                if (!(_priceAsString.EndsWith("00")))
+                {
+                    _priceAsString = _priceAsString.Insert(_priceAsString.Length - 2, ",");
+                }
+                else
+                {
+                    _priceAsString = _priceAsString.Remove(_priceLen - 2);
+                    _priceAsString = _priceAsString + ";";
+                }
             }
         }
 
@@ -39,7 +56,7 @@ namespace eksamen
 
         public override string ToString()
         {
-            string result = "Admin    Transaction ID: " + _transactionID + " Amount: " + _creditChange + " timestamp: " + _time.ToString();
+            string result = "Admin    Transaction ID: " + _transactionID + " Amount: " + _priceAsString + " timestamp: " + _time.ToString();
             return result;
         }
     }

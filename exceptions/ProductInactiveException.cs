@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace eksamen
 {
-    class ProductInactiveException : Exception
+    public class ProductInactiveException : Exception
     {
         User _user;
         Product _product;
+        public ProductInactiveException() { }
         public ProductInactiveException(string message, User user, Product product)
             : base (message)
         {

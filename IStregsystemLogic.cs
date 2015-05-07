@@ -13,7 +13,7 @@ namespace eksamen
         void AddCreditToAccount(User user, long amount);
         void ExecuteTransaction(Transaction transaction);
         Product GetProduct();
-        User GetUser();
+        User GetUser(String UserName);
         List<Transaction> GetUserTransactions(User user, int amountOfTransactionsToGet);
         List<Product> GetActiveProducts();
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace eksamen
@@ -19,6 +20,10 @@ namespace eksamen
             _lastname = lastname;
             _email = email;
             _balance = balance;
+            if (!(Regex.IsMatch(_email, "(?i)[A-Z0-9._-]+@[A-Z0-9][A-Z0-9-]*[.][A-Z]{2,4}[.]*[A-Z]*$"))) //Thanks regex101.com and MSDN!
+            {
+                throw new FormatException("Email address is invalid");
+            }
         }
 
         public long Balance
@@ -30,12 +35,21 @@ namespace eksamen
         public int ID
         {
             get { return _userID; }
-            set { Balance = value; }
+        }
+
+        public string Username
+        {
+            get { return _username; }
+        }
+
+        public string Email
+        {
+            get { return _email; }
         }
 
         public override string ToString()
         {
-            String result = _firstname + " " + _lastname + " " + _email;
+            String result = _firstname + " " + _lastname + " (" + _email + ")";
             return result;
         }
 

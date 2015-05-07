@@ -38,11 +38,15 @@ namespace eksamen
 
         public static void SaveTransactions(List<Transaction> transactionList)
         {
-            if (File.Exists("transactions.txt"))
+            string[] files = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.txt");
+            int i = files.Length + 1;
+            int len = transactionList.Count();
+            String[] linesToWrite = new String[len];
+            for (int x = 0; x < len; x++)
             {
-
+                linesToWrite[x] = transactionList.ElementAt(x).ToString();
             }
-            throw new NotImplementedException();
+            System.IO.File.WriteAllLines("transaction log " + i + ".txt", linesToWrite);
         }
 
         public static List<User> LoadUsers()

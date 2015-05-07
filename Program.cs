@@ -10,6 +10,12 @@ namespace eksamen
     {
         static void Main(string[] args)
         {
+
+            IStregsystemLogic stregsystem = new StregsystemLogic();
+            IStregsystemUI cli = new StregsystemCLI(stregsystem);
+            StregsystemCommandParser parser = new StregsystemCommandParser(cli, stregsystem);
+            
+
             //TEST
             List<Product> liste = new List<Product>();
             liste = SaveLoadTools.LoadProducts();
@@ -17,12 +23,10 @@ namespace eksamen
             {
                 Console.WriteLine(item.ToString());
             }
+            Console.WriteLine(stregsystem.GetUser("Max").ToString());
             Console.ReadKey();
             //TEST
 
-            IStregsystemLogic stregsystem = new StregsystemLogic();
-            IStregsystemUI cli = new StregsystemCLI(stregsystem);
-            StregsystemCommandParser parser = new StregsystemCommandParser(cli, stregsystem);
             cli.Start(parser);
         }
     }

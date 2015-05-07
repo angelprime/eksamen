@@ -23,17 +23,17 @@ namespace eksamen
             {
                 throw new ProductInactiveException("The product is not currently available. User: " + _user.ID + " product: " + _product.ID, _user, _product);
             }
-            if (_product.CanBeBoughtWithCredit || (_user.Balance + _creditChange) >= 0)
+            if (_product.CanBeBoughtWithCredit || (_user.Balance + _creditChange) > 0)
             {
                 return base.Execute();
             }
-            throw new InsufficientCreditException("Not enough funds to make purchase. User: " + _user.ID + " product: " + _product.ID + " price: " + _product.Price, _user, _product);
+            throw new InsufficientCreditException("Not enough funds to make purchase. User: " + _user.ID + " product: " + _product.ID + " price: " + _product.PriceAsString, _user, _product);
 
         }
 
         public override string ToString()
         {
-            string result = "Purchase Transaction ID: " + _transactionID + " User ID: " + _user.ID + " Amount: " + _price + " timestamp: " + _time.ToString();
+            string result = "Purchase Transaction ID: " + _transactionID + " User ID: " + _user.ID + " Amount: " + _product.PriceAsString + " timestamp: " + _time.ToString();
             return result;
         }
     }

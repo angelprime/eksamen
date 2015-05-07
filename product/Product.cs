@@ -45,6 +45,11 @@ namespace eksamen
             get { return _price; }
         }
 
+        public string PriceAsString
+        {
+            get { return _priceAsString; }
+        }
+
         public bool CanBeBoughtWithCredit
         {
             get { return _canBeBoughtOnCredit; }
