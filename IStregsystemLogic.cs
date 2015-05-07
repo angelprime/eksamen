@@ -9,12 +9,12 @@ namespace eksamen
     public interface IStregsystemLogic
     {
 
-        void BuyProduct(User user, Product product);
-        void AddCreditToAccount(User user, long amount);
+        void BuyProduct(string username, int productID);
+        void AddCreditToAccount(string username, long amount);
         void ExecuteTransaction(Transaction transaction);
         Product GetProduct(int ID);
         User GetUser(String UserName);
-        List<Transaction> GetUserTransactions(User user, int amountOfTransactionsToGet);
+        List<Transaction> GetUserTransactions(string username, int amountOfTransactionsToGet);
         List<Product> GetActiveProducts();
 
     }

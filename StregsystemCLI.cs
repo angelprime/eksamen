@@ -8,10 +8,10 @@ namespace eksamen
 {
     public class StregsystemCLI : IStregsystemUI
     {
-
+        IStregsystemLogic _ss;
         public StregsystemCLI(IStregsystemLogic stregsystem)
         {
-
+            _ss = stregsystem;
         }
 
 

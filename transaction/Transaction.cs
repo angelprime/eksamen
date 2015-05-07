@@ -43,6 +43,16 @@ namespace eksamen
             }
         }
 
+        public User User
+        {
+            get { return _user; }
+        }
+
+        public DateTime Timestamp
+        {
+            get { return _time; }
+        }
+
         public virtual User Execute()
         {
             if (_hasExecuted)
