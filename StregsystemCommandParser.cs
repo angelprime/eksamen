@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 
 namespace eksamen
 {
-    class StregsystemCommandParser
+    public class StregsystemCommandParser
     {
+
+        public StregsystemCommandParser(IStregsystemUI UI, IStregsystemLogic stregsystem)
+        {
+
+        }
+
         public void ParseCommand(string command)
         {
 

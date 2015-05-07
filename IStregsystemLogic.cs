@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace eksamen
 {
-    class IStregsystemLogic
+    public interface IStregsystemLogic
     {
 
-        public void BuyProduct(User user, Product product);
-        public void AddCreditToAccount(User user, long amount);
-        public void ExecuteTransaction(Transaction transaction);
-        public Product GetProduct();
-        public User GetUser();
-        public List<Transaction> GetUserTransactions(User user, int amountOfTransactionsToGet);
-        public List<Product> GetActiveProducts();
+        void BuyProduct(User user, Product product);
+        void AddCreditToAccount(User user, long amount);
+        void ExecuteTransaction(Transaction transaction);
+        Product GetProduct();
+        User GetUser();
+        List<Transaction> GetUserTransactions(User user, int amountOfTransactionsToGet);
+        List<Product> GetActiveProducts();
 
     }
 }

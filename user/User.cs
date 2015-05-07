@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace eksamen
 {
-    class User : IComparable
+    public class User : IComparable
     {
         String _username, _firstname, _lastname, _email;
         int _userID;

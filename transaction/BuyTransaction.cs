@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace eksamen
 {
-    class BuyTransaction : Transaction
+    public class BuyTransaction : Transaction
     {
         Product _product;
         long _price;

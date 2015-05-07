@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace eksamen
 {
-    class InsertCashTransaction :Transaction
+    public class InsertCashTransaction :Transaction
     {
 
         public InsertCashTransaction(long ID, User user, long creditChange)

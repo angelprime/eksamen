@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace eksamen
 {
-    class Product
+    public class Product
     {
-        int _productID;
+        int _productID, _priceLen;
         long _price;
-        string _name;
+        string _name, _priceAsString;
         bool _active, _canBeBoughtOnCredit;
         public Product(int ID, String name, long price, bool active, bool credit)
         {
@@ -19,6 +19,20 @@ namespace eksamen
             _price = price;
             _active = active;
             _canBeBoughtOnCredit = credit;
+            _priceAsString = _price.ToString();
+            _priceLen = _priceAsString.Length;
+            if (_price != 0)
+            {
+                if (!(_priceAsString.EndsWith("00")))
+                {
+                    _priceAsString = _priceAsString.Insert(_priceAsString.Length - 2, ",");  
+                }
+                else
+                {
+                    _priceAsString = _priceAsString.Remove(_priceLen - 2);
+                    _priceAsString = _priceAsString + ";";
+                }
+            }
         }
 
         public int ID
@@ -39,6 +53,11 @@ namespace eksamen
         public bool IsActive
         {
             get { return _active; }
+        }
+
+        public override string ToString()
+        {
+            return "Product ID: " + _productID + " Name: " + _name + " Price: " + _priceAsString + " Buy with credit: " + _canBeBoughtOnCredit;
         }
 
         public override bool Equals(object obj)

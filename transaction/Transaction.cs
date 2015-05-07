@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace eksamen
 {
-    class Transaction
+    public class Transaction
     {
         protected long _transactionID, _creditChange;
         protected User _user;
@@ -19,7 +19,7 @@ namespace eksamen
             _creditChange = creditChange;
             _time = DateTime.Now;
             _hasExecuted = false;
-            if (_user == null || _transactionID < 1 || _creditChange == 0 || _creditChange == null)
+            if (_user == null || _transactionID < 1 || _creditChange == 0)
             {
                 _hasExecuted = true;
                 throw new ArgumentException("Must specify a user, a positive ID and a non-zero credit change");

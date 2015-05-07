@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.IO;
-using System.Collections.Generic;
 
 namespace eksamen
 {
@@ -16,15 +16,38 @@ namespace eksamen
         {
             if (File.Exists("products.csv")) 
             {
-                String[] tempArr = File.ReadAllLines("products.csv");
+                List<Product> _productList = new List<Product>();
+                String[] tempArr = File.ReadAllLines("products.csv", Encoding.UTF7);
                 int len = tempArr.Length;
                 for (int i = 1; i < len; i++)
                 {
-                    
+                    String _stringToSplit = tempArr.ElementAt(i);
+                    String _splitPattern = ";";
+                    String[] _splitString = Regex.Split(_stringToSplit, _splitPattern);
+                    int _id = Convert.ToInt32(_splitString.ElementAt(0));
+                    string _name = Regex.Replace(_splitString.ElementAt(1), "\"|<[^>]*>", "");
+                    long _price = Convert.ToInt64(_splitString.ElementAt(2));
+                    bool _active = Convert.ToBoolean(Convert.ToInt32(_splitString.ElementAt(3)));
+                    Product _readProduct = new Product(_id, _name, _price, _active, false);
+                    _productList.Add(_readProduct);
                 }
-                return null;
+                return _productList;
             }
-            return null;
+            throw new FileNotFoundException("products.csv blev ikke fundet. Ligger filen i samme mappe som programmet?");
+        }
+
+        public static void SaveTransactions(List<Transaction> transactionList)
+        {
+            if (File.Exists("transactions.txt"))
+            {
+
+            }
+            throw new NotImplementedException();
+        }
+
+        public static List<User> LoadUsers()
+        {
+            throw new NotImplementedException();
         }
     }
 }
