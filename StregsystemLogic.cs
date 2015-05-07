@@ -15,8 +15,8 @@ namespace eksamen
         public StregsystemLogic()
         {
             _productList = SaveLoadTools.LoadProducts();
-            //User ass = new User(13, "Max", "Maxi", "Millian", "my@mail.any", 3000);
-            //_userList.Add(ass);
+            //User ass = new User(13, "Max", "Maxi", "Millian", "my@mail.any", 3000);//TEST
+            //_userList.Add(ass);                                                    //TEST
         }
 
 
@@ -35,14 +35,20 @@ namespace eksamen
             throw new NotImplementedException();
         }
 
-        public Product GetProduct()
+        public Product GetProduct(int ID)
         {
-            throw new NotImplementedException();
+            Product result = new Product();
+            result = _productList.Find(x => x.ID == ID);
+            if (result != null)
+            {
+                return result;
+            }
+            throw new ProductNotFoundException("Product: " + ID + " not found.");
         }
 
         public User GetUser(String UserName)
         {
-            User result = new User(0, "", "", "", "none@empty.aa", 0);
+            User result = new User();
             result = _userList.Find(x => x.Username == UserName);
             if (result != null)
             {

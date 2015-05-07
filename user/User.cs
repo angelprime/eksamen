@@ -12,6 +12,15 @@ namespace eksamen
         String _username, _firstname, _lastname, _email;
         int _userID;
         long _balance;
+        public User()
+        {
+            _userID = 0;
+            _username = "";
+            _firstname = "";
+            _lastname = "";
+            _email = "";
+            _balance = 0;
+        }
         public User(int userID, String username, String firstname, String lastname, String email, long balance)
         {
             _userID = userID;

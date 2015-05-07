@@ -12,6 +12,14 @@ namespace eksamen
         long _price;
         string _name, _priceAsString;
         bool _active, _canBeBoughtOnCredit;
+        public Product()
+        {
+            _productID = 0;
+            _name = "";
+            _price = 0;
+            _active = false;
+            _canBeBoughtOnCredit = false;
+        }
         public Product(int ID, String name, long price, bool active, bool credit)
         {
             _productID = ID;
