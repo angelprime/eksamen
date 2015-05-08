@@ -17,14 +17,14 @@ namespace eksamen
             
 
             //TEST
-            List<Product> liste = new List<Product>();
+            /*List<Product> liste = new List<Product>();
             liste = SaveLoadTools.LoadProducts();
             foreach (Product item in liste)
             {
                 Console.WriteLine(item.ToString());
             }
             Console.WriteLine(stregsystem.GetUser("Max").ToString());
-            Console.ReadKey();
+            Console.ReadKey();*/
             //TEST
 
             cli.Start(parser);

@@ -9,8 +9,8 @@ namespace eksamen
 {
     public class User : IComparable
     {
-        String _username, _firstname, _lastname, _email;
-        int _userID;
+        String _username, _firstname, _lastname, _email, _balanceAsString;
+        int _userID, _balanceLen;
         long _balance;
         public User()
         {
@@ -29,7 +29,7 @@ namespace eksamen
             _lastname = lastname;
             _email = email;
             _balance = balance;
-            if (!(Regex.IsMatch(_email, "(?i)[A-Z0-9._-]+@[A-Z0-9][A-Z0-9-]*[.][A-Z]{2,4}[.]*[A-Z]*$"))) //Thanks regex101.com and MSDN!
+            if (!(Regex.IsMatch(_email, "(?i)[A-Z0-9._-]+@[A-Z0-9][A-Z0-9-]*[.][A-Z]{2,4}$"))) //Thanks regex101.com and MSDN!
             {
                 throw new FormatException("Email address is invalid");
             }
@@ -39,6 +39,28 @@ namespace eksamen
         {
             get { return _balance; }
             set{_balance = value;}
+        }
+
+        public string BalanceAsString
+        {
+            get
+            {
+                _balanceAsString = _balance.ToString();
+                _balanceLen = _balanceAsString.Length;
+                if (_balanceLen > 2)
+                {
+                    if (!(_balanceAsString.EndsWith("00")))
+                    {
+                        _balanceAsString = _balanceAsString.Insert(_balanceAsString.Length - 2, ",");
+                    }
+                    else
+                    {
+                        _balanceAsString = _balanceAsString.Remove(_balanceLen - 2);
+                        _balanceAsString = _balanceAsString + ";";
+                    }
+                }
+                return _balanceAsString;
+            }
         }
 
         public int ID
@@ -58,7 +80,7 @@ namespace eksamen
 
         public override string ToString()
         {
-            String result = _firstname + " " + _lastname + " (" + _email + ")";
+            String result = _firstname + " " + _lastname + " (" + _email + ")" + "  Balance: " + this.BalanceAsString;
             return result;
         }
 

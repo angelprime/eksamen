@@ -48,6 +48,11 @@ namespace eksamen
             get { return _productID; }
         }
 
+        public string Name
+        {
+            get { return _name; }
+        }
+
         public long Price
         {
             get { return _price; }
@@ -70,7 +75,7 @@ namespace eksamen
 
         public override string ToString()
         {
-            return "Product ID: " + _productID + " Name: " + _name + " Price: " + _priceAsString + " Buy with credit: " + _canBeBoughtOnCredit;
+            return "Product ID: " + _productID + "  Name: " + _name + "  Price: " + _priceAsString + "  Buy with credit: " + _canBeBoughtOnCredit;
         }
 
         public override bool Equals(object obj)

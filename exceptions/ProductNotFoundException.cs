@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eksamen.exceptions
+namespace eksamen
 {
     public class ProductNotFoundException : Exception
     {

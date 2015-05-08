@@ -7,3 +7,6 @@ C:\Users\jonas\Documents\GitHub\eksamen\obj\Debug\Stregsystem.pdb
 c:\users\jonas\documents\visual studio 2013\Projects\eksamen\eksamen\bin\Debug\Stregsystem.exe.config
 c:\users\jonas\documents\visual studio 2013\Projects\eksamen\eksamen\obj\Debug\Stregsystem.exe
 c:\users\jonas\documents\visual studio 2013\Projects\eksamen\eksamen\obj\Debug\Stregsystem.pdb
+c:\Users\Jonas\Documents\Visual Studio 2013\Projects\eksamen\eksamen\obj\Debug\Stregsystem.csprojResolveAssemblyReference.cache
+c:\Users\Jonas\Documents\Visual Studio 2013\Projects\eksamen\eksamen\bin\Debug\Stregsystem.exe
+c:\Users\Jonas\Documents\Visual Studio 2013\Projects\eksamen\eksamen\bin\Debug\Stregsystem.pdb

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using eksamen.exceptions;
 
 namespace eksamen
 {
@@ -17,8 +16,8 @@ namespace eksamen
         {
             _productList = SaveLoadTools.LoadProducts();
             _nextTransactionNumber = 1;
-            //User ass = new User(13, "Max", "Maxi", "Millian", "my@mail.any", 3000);//TEST
-            //_userList.Add(ass);                                                    //TEST
+            User ass = new User(13, "Max", "Maxi", "Millian", "my@mail.any", 10000);//TEST
+            _userList.Add(ass);                                                    //TEST
         }
 
 
@@ -39,19 +38,9 @@ namespace eksamen
 
         public void ExecuteTransaction(Transaction transaction)
         {
-            try
-            {
                 transaction.Execute();
                 _nextTransactionNumber++;
                 _transactionList.Add(transaction);
-
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Transaction failed.");
-                SaveLoadTools.SaveTransactions(_transactionList);  //This is a really bad idea, but it's in the documentation
-                throw;
-            }
         }
 
         public Product GetProduct(int ID)
@@ -73,14 +62,20 @@ namespace eksamen
             {
                 return result;
             }
-            throw new UserNotFoundException("User: " + UserName + " not found.");
+            throw new UserNotFoundException(UserName);
         }
 
+        /// <summary>
+        /// Returns a list of transactions containing the specified amount of purchases, taken fro the most recent
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="amountOfTransactionsToGet"></param>
+        /// <returns></returns>
         public List<Transaction> GetUserTransactions(string username, int amountOfTransactionsToGet)
         {
-            List<Transaction> userTransactions = _transactionList.FindAll(y => y.User.Username == username);
+            List<Transaction> userTransactions = _transactionList.FindAll(y => y.User.Username == username && y.GetType() == typeof(BuyTransaction));
             List<Transaction> result = new List<Transaction>();
-            userTransactions.Sort((x, y) => DateTime.Compare(x.Timestamp, y.Timestamp));
+            userTransactions.Sort((x, y) => DateTime.Compare(y.Timestamp, x.Timestamp));
             int length = userTransactions.Count();
             for (int i = 0; i < length && i < amountOfTransactionsToGet; i++)
             {

@@ -9,66 +9,89 @@ namespace eksamen
     public class StregsystemCLI : IStregsystemUI
     {
         IStregsystemLogic _ss;
+        List<Product> _productList;
+        bool quit;
         public StregsystemCLI(IStregsystemLogic stregsystem)
         {
             _ss = stregsystem;
         }
 
 
-        public void DisplayUserNotFound()
+        public void DisplayUserNotFound(string username)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("User '" + username + "' not found.");
         }
 
-        public void DisplayProductNotFound()
+        public void DisplayProductNotFound(int productID)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Product '" + productID + "' not found.");
         }
 
-        public void DisplayUserInfo()
+        public void DisplayUserInfo(User user)
         {
-            throw new NotImplementedException();
+            Console.WriteLine(user.ToString());
+            if (user.Balance < 5000)
+            {
+                Console.WriteLine("Balance low!");
+            }
         }
 
         public void DisplayTooManyArgumentsError()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Error: Too many arguments!");
         }
 
-        public void DisplayAdminCommandNotFoundMessage()
+        public void DisplayAdminCommandNotFoundError()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Error: Admin command not found.");
         }
 
-        public void DisplayUserBuysProduct(BuyTransaction transaction)
+        public void DisplayUserBuysProduct(Product product)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Bought product: " + product.Name);
         }
 
-        public void DisplayUserBuysProduct(int count)
+        public void DisplayUserBuysProduct(Product product, int amount)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Bought " + amount + " of product: " + product.Name);
+        }
+
+        public void DisplayTransaction(Transaction transaction)
+        {
+            Console.WriteLine(transaction.ToString());
         }
 
         public void Close()
         {
-            throw new NotImplementedException();
+            quit = true;
         }
 
-        public void DisplayInsufficientCash()
+        public void DisplayInsufficientFundsError()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Error: Insufficient funds. Transaction cancelled.");
         }
 
         public void DisplayGeneralError(string errorString)
         {
-            throw new NotImplementedException();
+            Console.WriteLine(errorString);
         }
 
 
         public void Start(StregsystemCommandParser parser)
         {
-            throw new NotImplementedException();
+            quit = false;
+            do
+            {
+                Console.Clear();
+                _productList = _ss.GetActiveProducts();
+                foreach (Product item in _productList)
+                {
+                    Console.WriteLine(item.ToString());
+                }
+                parser.ParseCommand(Console.ReadLine());
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+            } while (!quit);
         }
     }
 }

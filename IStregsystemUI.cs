@@ -8,15 +8,16 @@ namespace eksamen
 {
     public interface IStregsystemUI
     {
-        void DisplayUserNotFound();
-        void DisplayProductNotFound();
-        void DisplayUserInfo();
+        void DisplayUserNotFound(string username);
+        void DisplayProductNotFound(int productID);
+        void DisplayUserInfo(User user);
         void DisplayTooManyArgumentsError();
-        void DisplayAdminCommandNotFoundMessage();
-        void DisplayUserBuysProduct(BuyTransaction transaction);
-        void DisplayUserBuysProduct(int count);
+        void DisplayAdminCommandNotFoundError();
+        void DisplayUserBuysProduct(Product product);
+        void DisplayUserBuysProduct(Product product, int amount);
+        void DisplayTransaction(Transaction transaction);
         void Close();
-        void DisplayInsufficientCash();
+        void DisplayInsufficientFundsError();
         void DisplayGeneralError(string errorString);
         void Start(StregsystemCommandParser parser);
     }

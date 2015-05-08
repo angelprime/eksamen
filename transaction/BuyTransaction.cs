@@ -21,7 +21,7 @@ namespace eksamen
         {
             if (!_product.IsActive)
             {
-                throw new ProductInactiveException("The product is not currently available. User: " + _user.ID + " product: " + _product.ID, _user, _product);
+                throw new ProductInactiveException("The product is not currently available. User: " + _user.Username + " product: " + _product.ID, _user, _product);
             }
             if (_product.CanBeBoughtWithCredit || (_user.Balance + _creditChange) > 0)
             {
@@ -33,7 +33,7 @@ namespace eksamen
 
         public override string ToString()
         {
-            string result = "Purchase Transaction ID: " + _transactionID + " User ID: " + _user.ID + " Amount: " + _product.PriceAsString + " timestamp: " + _time.ToString();
+            string result = "Purchase Transaction ID: " + _transactionID + " User: " + _user.Username + " Product: " + _product.Name +  " Price: " + _product.PriceAsString + " timestamp: " + _time.ToString();
             return result;
         }
     }

@@ -17,7 +17,7 @@ namespace eksamen
             if (File.Exists("products.csv")) 
             {
                 List<Product> _productList = new List<Product>();
-                String[] tempArr = File.ReadAllLines("products.csv", Encoding.UTF7);
+                String[] tempArr = File.ReadAllLines("products.csv", Encoding.Default);
                 int len = tempArr.Length;
                 for (int i = 1; i < len; i++)
                 {
