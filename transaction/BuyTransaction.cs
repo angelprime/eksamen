@@ -23,7 +23,7 @@ namespace eksamen
             {
                 throw new ProductInactiveException("The product is not currently available. User: " + _user.Username + " product: " + _product.ID, _user, _product);
             }
-            if (_product.CanBeBoughtWithCredit || (_user.Balance + _creditChange) > 0)
+            if (_product.CanBeBoughtWithCredit || (_user.Balance + _creditChange) >= 0)
             {
                 return base.Execute();
             }

@@ -16,17 +16,19 @@ namespace eksamen
             _ss = stregsystem;
         }
 
-
+        //displays error
         public void DisplayUserNotFound(string username)
         {
             Console.WriteLine("User '" + username + "' not found.");
         }
 
+        //displays error
         public void DisplayProductNotFound(int productID)
         {
             Console.WriteLine("Product '" + productID + "' not found.");
         }
 
+        //displays info about a user
         public void DisplayUserInfo(User user)
         {
             Console.WriteLine(user.ToString());
@@ -36,47 +38,55 @@ namespace eksamen
             }
         }
 
+        //displays error
         public void DisplayTooManyArgumentsError()
         {
             Console.WriteLine("Error: Too many arguments!");
         }
 
+        //displays error
         public void DisplayAdminCommandNotFoundError()
         {
             Console.WriteLine("Error: Admin command not found.");
         }
 
+        //displays buy
         public void DisplayUserBuysProduct(Product product)
         {
             Console.WriteLine("Bought product: " + product.Name);
         }
 
+        //displays multibuy
         public void DisplayUserBuysProduct(Product product, int amount)
         {
             Console.WriteLine("Bought " + amount + " of product: " + product.Name);
         }
 
+        //displays the given transaction
         public void DisplayTransaction(Transaction transaction)
         {
             Console.WriteLine(transaction.ToString());
         }
 
+        //Tells the user input loop to stop looping
         public void Close()
         {
             quit = true;
         }
 
+        //Displays error
         public void DisplayInsufficientFundsError()
         {
             Console.WriteLine("Error: Insufficient funds. Transaction cancelled.");
         }
 
+        //displays text, normally of the error variety, though it doesn't actually check
         public void DisplayGeneralError(string errorString)
         {
             Console.WriteLine(errorString);
         }
 
-
+        //enters the user input loop
         public void Start(StregsystemCommandParser parser)
         {
             quit = false;
@@ -92,6 +102,17 @@ namespace eksamen
                 Console.WriteLine("Press any key to continue...");
                 Console.ReadKey();
             } while (!quit);
+        }
+
+        //displays a list of all inactive products, instead of the usual list of active ones
+        public void DisplayInactiveProducts()
+        {
+            Console.Clear();
+            List<Product> list = _ss.GetInactiveProducts();
+            foreach (Product item in list)
+            {
+                Console.WriteLine(item.ToString());
+            }
         }
     }
 }

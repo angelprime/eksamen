@@ -16,6 +16,12 @@ namespace eksamen
         User GetUser(String UserName);
         List<Transaction> GetUserTransactions(string username, int amountOfTransactionsToGet);
         List<Product> GetActiveProducts();
+        List<Product> GetInactiveProducts();
+        void ActivateProduct(int ID);
+        void DeactivateProduct(int ID);
+        void SetCBBOCtoTrue(int ID);
+        void SetCBBOCtoFalse(int ID);
+        void SaveTransactionsToFile();
 
     }
 }

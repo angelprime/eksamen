@@ -11,7 +11,7 @@ namespace eksamen
     public static class SaveLoadTools
     {
         
-
+        //loads products and returns in a list
         public static List<Product> LoadProducts()
         {
             if (File.Exists("products.csv")) 
@@ -36,6 +36,7 @@ namespace eksamen
             throw new FileNotFoundException("products.csv blev ikke fundet. Ligger filen i samme mappe som programmet?");
         }
 
+        //saves transactions to a file. If file already exists, creates new file with different name.
         public static void SaveTransactions(List<Transaction> transactionList)
         {
             string[] files = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.txt");

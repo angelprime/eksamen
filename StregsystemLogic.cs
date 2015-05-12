@@ -16,11 +16,11 @@ namespace eksamen
         {
             _productList = SaveLoadTools.LoadProducts();
             _nextTransactionNumber = 1;
-            User ass = new User(13, "Max", "Maxi", "Millian", "my@mail.any", 10000);//TEST
-            _userList.Add(ass);                                                    //TEST
+            User any = new User(13, "Max", "Maxi", "Millian", "my@mail.any", 10000);//TEST
+            _userList.Add(any);                                                     //TEST
         }
 
-
+        //lets 'username' buy one instance of product 'productID'
         public void BuyProduct(string username, int productID)
         {
             User user = GetUser(username);
@@ -29,6 +29,7 @@ namespace eksamen
             ExecuteTransaction(transaction);
         }
 
+        //adds 'amount' credits to user 'username'
         public void AddCreditToAccount(string username, long amount)
         {
             User user = GetUser(username);
@@ -36,13 +37,15 @@ namespace eksamen
             ExecuteTransaction(transaction);
         }
 
+        //executes and stores the given transaction<
         public void ExecuteTransaction(Transaction transaction)
         {
-                transaction.Execute();
-                _nextTransactionNumber++;
-                _transactionList.Add(transaction);
+            transaction.Execute();
+            _nextTransactionNumber++;
+            _transactionList.Add(transaction);
         }
 
+        //returns a product specified by ID
         public Product GetProduct(int ID)
         {
             Product result = new Product();
@@ -54,6 +57,7 @@ namespace eksamen
             throw new ProductNotFoundException("Product: " + ID + " not found.");
         }
 
+        //returns a user specified by username
         public User GetUser(String UserName)
         {
             User result = new User();
@@ -84,10 +88,80 @@ namespace eksamen
             return result;
         }
 
+        //returns a list of all active products
         public List<Product> GetActiveProducts()
         {
             List<Product> result = _productList.FindAll(x => x.IsActive);
             return result;
+        }
+
+        //returns a list of all inactive products
+        public List<Product> GetInactiveProducts()
+        {
+            List<Product> result = _productList.FindAll(x => !x.IsActive);
+            return result;
+        }
+
+        //method that sets a products _active state to TRUE
+        public void ActivateProduct(int ID)
+        {
+            Product temp = _productList.Find(x => x.ID == ID);
+            if (temp != null)
+            {
+                temp.Activate();
+            }
+            else
+            {
+                throw new ProductNotFoundException("Product: " + ID + " not found.");
+            }
+        }
+
+        //method that sets a products _active state to FALSE, implemented with method calls
+        public void DeactivateProduct(int ID)
+        {
+            Product temp = _productList.Find(x => x.ID == ID);
+            if (temp != null)
+            {
+                temp.Deactivate();
+            }
+            else
+            {
+                throw new ProductNotFoundException("Product: " + ID + " not found.");
+            }
+        }
+
+        //method that allows a product to be bought on credit, implemented with get/set
+        public void SetCBBOCtoTrue(int ID)
+        {
+            Product temp = _productList.Find(x => x.ID == ID);
+            if (temp != null)
+            {
+                temp.CanBeBoughtWithCredit = true;
+            }
+            else
+            {
+                throw new ProductNotFoundException("Product: " + ID + " not found.");
+            }
+        }
+
+        //method that disallows a product to be bought on credit
+        public void SetCBBOCtoFalse(int ID)
+        {
+            Product temp = _productList.Find(x => x.ID == ID);
+            if (temp != null)
+            {
+                temp.CanBeBoughtWithCredit = false;
+            }
+            else
+            {
+                throw new ProductNotFoundException("Product: " + ID + " not found.");
+            }
+        }
+
+        //sends list for saving
+        public void SaveTransactionsToFile()
+        {
+            SaveLoadTools.SaveTransactions(_transactionList);
         }
     }
 }

@@ -20,5 +20,6 @@ namespace eksamen
         void DisplayInsufficientFundsError();
         void DisplayGeneralError(string errorString);
         void Start(StregsystemCommandParser parser);
+        void DisplayInactiveProducts();
     }
 }

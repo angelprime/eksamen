@@ -66,6 +66,7 @@ namespace eksamen
         public bool CanBeBoughtWithCredit
         {
             get { return _canBeBoughtOnCredit; }
+            set { _canBeBoughtOnCredit = value; }
         }
 
         public bool IsActive
@@ -102,6 +103,16 @@ namespace eksamen
                 return this._productID.CompareTo(u._productID);
             else
                 throw new ArgumentException("Object is not a Product");
+        }
+
+        public void Activate()
+        {
+            _active = true;
+        }
+
+        public void Deactivate()
+        {
+            _active = false;
         }
     }
 }

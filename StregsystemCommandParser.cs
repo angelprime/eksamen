@@ -16,19 +16,29 @@ namespace eksamen
         Product _product;
         long _totalPrice;
         List<Transaction> transactions;
+        Dictionary<String, Func<object, bool>> _adminTable = new Dictionary<string, Func<object, bool>>();
         public StregsystemCommandParser(IStregsystemUI UI, IStregsystemLogic stregsystem)
         {
             _UI = UI;
             _ss = stregsystem;
+            _adminTable.Add(":q", AQuit);
+            _adminTable.Add(":quit", AQuit);
+            _adminTable.Add(":activate", AActivate);
+            _adminTable.Add(":deactivate", ADeactivate);
+            _adminTable.Add(":crediton", AAllowCredit);
+            _adminTable.Add(":creditoff", ADenyCredit);
+            _adminTable.Add(":addcredits", AAddCredits);
+
         }
 
+        //Parses and executes non-admin commands. Admin commands are passed to AdminCommand
         public void ParseCommand(string command)
         {
             string[] input = Regex.Split(command, " ");
             int len = input.Length;
             if (command.StartsWith(":"))
             {
-                AdminCommand(command);
+                AdminCommand(input);
             }
             else if (len > 3)
             {
@@ -93,9 +103,177 @@ namespace eksamen
             
         }
 
-        private void AdminCommand(string command)
+        //handler for admin commands
+        private void AdminCommand(string[] input)
         {
+            try
+            {
+                Func<object, bool> commandFunc = _adminTable[input[0]];
+                commandFunc(input);
+            }
+            catch (KeyNotFoundException)
+            {
+                _UI.DisplayGeneralError("Error: Invalid admin command");
+            }
+            
+            
+        }
 
+        //Command to close program
+        private bool AQuit(object input)
+        {
+            _UI.Close();
+            return true;
+        }
+
+        //Command to activate a product
+        private bool AActivate(Object rawInput) 
+        {
+            string[] input = rawInput as string[];
+            if(input.Length == 1)
+            {
+                _UI.DisplayInactiveProducts();
+                _UI.DisplayGeneralError(":activate must be followed by the number of one of the above inactive products");
+            }
+            else if(input.Length == 2)
+            {
+                try
+                {
+                    int i = Convert.ToInt32(input[1]);
+                    _ss.ActivateProduct(i);
+                }
+                catch (ProductNotFoundException e)
+                {
+                    _UI.DisplayGeneralError(e.Message);
+                }
+                catch (FormatException)
+                {
+                    _UI.DisplayGeneralError("Error: :activate must be followed by a single, positive integer");
+                }
+
+            }
+            else
+            {
+                _UI.DisplayGeneralError("Error: Wrong number of parameters for this action");
+                return false;
+            }
+            return true;
+        }
+
+        //Command to deactivate a product
+        private bool ADeactivate(Object rawInput)
+        {
+            string[] input = rawInput as string[];
+            if (input.Length == 2)
+            {
+                try
+                {
+                    int i = Convert.ToInt32(input[1]);
+                    _ss.DeactivateProduct(i);
+                }
+                catch (ProductNotFoundException e)
+                {
+                    _UI.DisplayGeneralError(e.Message);
+                }
+                catch (FormatException)
+                {
+                    _UI.DisplayGeneralError("Error: :deactivate must be followed by a single, positive integer");
+                }
+
+            }
+            else
+            {
+                _UI.DisplayGeneralError("Error: Wrong number of parameters for this action");
+                return false;
+            }
+            return true;
+        }
+
+        //command to allow a product to be bought on credit
+        private bool AAllowCredit(Object rawInput)
+        {
+            string[] input = rawInput as string[];
+            if (input.Length == 2)
+            {
+                try
+                {
+                    int i = Convert.ToInt32(input[1]);
+                    _ss.SetCBBOCtoTrue(i);
+                }
+                catch (ProductNotFoundException e)
+                {
+                    _UI.DisplayGeneralError(e.Message);
+                }
+                catch (FormatException)
+                {
+                    _UI.DisplayGeneralError("Error: :crediton must be followed by a single, positive integer");
+                }
+
+            }
+            else
+            {
+                _UI.DisplayGeneralError("Error: Wrong number of parameters for this action");
+                return false;
+            }
+            return true;
+        }
+
+        //command to disallow a product from being bought on credit
+        private bool ADenyCredit(Object rawInput)
+        {
+            string[] input = rawInput as string[];
+            if (input.Length == 2)
+            {
+                try
+                {
+                    int i = Convert.ToInt32(input[1]);
+                    _ss.SetCBBOCtoFalse(i);
+                }
+                catch (ProductNotFoundException e)
+                {
+                    _UI.DisplayGeneralError(e.Message);
+                }
+                catch (FormatException)
+                {
+                    _UI.DisplayGeneralError("Error: :creditoff must be followed by a single, positive integer");
+                }
+
+            }
+            else
+            {
+                _UI.DisplayGeneralError("Error: Wrong number of parameters for this action");
+                return false;
+            }
+            return true;
+        }
+
+        //command to add credits to account
+        private bool AAddCredits(object rawInput)
+        {
+            string[] input = rawInput as string[];
+            if (input.Length == 3)
+            {
+                try
+                {
+                    long i = Convert.ToInt64(input[2]);
+                    _ss.AddCreditToAccount(input[1], i);
+                }
+                catch (ProductNotFoundException e)
+                {
+                    _UI.DisplayGeneralError(e.Message);
+                }
+                catch (FormatException)
+                {
+                    _UI.DisplayGeneralError("Error: :addcredits must be followed by a username and an integer");
+                }
+
+            }
+            else
+            {
+                _UI.DisplayGeneralError("Error: Wrong number of parameters for this action");
+                return false;
+            }
+            return true;
         }
     }
 }
